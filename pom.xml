@@ -16,7 +16,7 @@
         <maven.compiler.target>1.7</maven.compiler.target>
 
         <jackson-core.version>2.9.8</jackson-core.version>
-        <jackson-databind.version>2.9.8</jackson-databind.version>
+        <jackson-databind.version>2.9.10.1</jackson-databind.version>
         <okhttp3.version>3.11.0</okhttp3.version>
         <netfleet-websocket.version>1.0.0-SNAPSHOT</netfleet-websocket.version>
         <geobyteframework-geojson.version>1.0.3-SNAPSHOT</geobyteframework-geojson.version>
