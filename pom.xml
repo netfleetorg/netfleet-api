@@ -21,7 +21,7 @@
         <okhttp3.version>3.11.0</okhttp3.version>
 
         <slf4j-api.version>1.7.25</slf4j-api.version>
-        <junit-version>4.12</junit-version>
+        <junit-version>4.13.1</junit-version>
     </properties>
 
     <name>netfleet-api</name>
