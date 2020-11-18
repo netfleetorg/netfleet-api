@@ -27,8 +27,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.netfleet.api.*;
-import org.netfleet.api.commons.json.JsonUtils;
-import org.netfleet.api.model.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,7 +64,7 @@ public class ResponsePageableConverter<T extends Model> implements ResponseConve
           throw new ApiException();
 
         JsonNode embedded = jsonNode.get("_embedded");
-        String path = RequestTemplate.PATHS.get(classType);
+        String path = RequestTemplate.REQUEST_CONTEXT.getPaths().get(classType);
 
         JsonNode elements = embedded.get(path);
         List<T> stack = new ArrayList<>();

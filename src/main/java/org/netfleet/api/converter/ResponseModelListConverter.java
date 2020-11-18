@@ -26,12 +26,7 @@ package org.netfleet.api.converter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.netfleet.api.ApiException;
-import org.netfleet.api.RequestTemplate;
-import org.netfleet.api.ResponseConverter;
-import org.netfleet.api.ResponseEntity;
-import org.netfleet.api.commons.json.JsonUtils;
-import org.netfleet.api.model.Model;
+import org.netfleet.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,7 +63,7 @@ public class ResponseModelListConverter<T extends Model> implements ResponseConv
           throw new ApiException();
 
         JsonNode embedded = jsonNode.get("_embedded");
-        String path = RequestTemplate.PATHS.get(classType);
+        String path = RequestTemplate.REQUEST_CONTEXT.getPaths().get(classType);
 
         JsonNode elements = embedded.get(path);
         for (JsonNode element : elements) {

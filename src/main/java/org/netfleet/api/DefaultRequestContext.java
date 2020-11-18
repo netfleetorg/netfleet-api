@@ -23,35 +23,25 @@
  */
 package org.netfleet.api;
 
-import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author M.Çağrı TEPEBAŞILI - cagritepebasili [at] protonmail [dot] com
  */
-public class Projection implements Serializable {
+public class DefaultRequestContext extends RequestContext {
 
-  public static String PARAMETER = "projection";
-
-  public static final Projection NONE = Projection.of(Object.class, "");
-
-  private final Class<?> key;
-  private final String value;
-
-  public Projection(Class<?> key, String value) {
-    this.key = key;
-    this.value = value;
+  public DefaultRequestContext() {
+    setPaths(new HashMap<Class<?>, String>());
+    setProjections(new HashMap<Class<?>, Projection>());
   }
 
-  public static Projection of(Class<?> key, String value) {
-    return new Projection(key, value);
+  public DefaultRequestContext(Map<Class<?>, String> paths, Map<Class<?>, Projection> projections) {
+    super(paths, projections);
+
   }
 
-  public Class<?> getKey() {
-    return this.key;
+  private void addProjection(Projection projection) {
+    getProjections().put(projection.getKey(), projection);
   }
-
-  public String getValue() {
-    return this.value;
-  }
-
 }

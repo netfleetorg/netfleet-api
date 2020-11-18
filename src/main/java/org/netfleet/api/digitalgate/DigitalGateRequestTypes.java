@@ -21,37 +21,13 @@
  * www.terrayazilim.com.tr if you need additional information or have
  * any questions.
  */
-package org.netfleet.api;
+package org.netfleet.api.digitalgate;
 
-import java.io.Serializable;
-
-/**
- * @author M.Çağrı TEPEBAŞILI - cagritepebasili [at] protonmail [dot] com
- */
-public class Projection implements Serializable {
-
-  public static String PARAMETER = "projection";
-
-  public static final Projection NONE = Projection.of(Object.class, "");
-
-  private final Class<?> key;
-  private final String value;
-
-  public Projection(Class<?> key, String value) {
-    this.key = key;
-    this.value = value;
+public final class DigitalGateRequestTypes {
+  private DigitalGateRequestTypes() {
   }
 
-  public static Projection of(Class<?> key, String value) {
-    return new Projection(key, value);
-  }
-
-  public Class<?> getKey() {
-    return this.key;
-  }
-
-  public String getValue() {
-    return this.value;
-  }
+  public static final DigitalGateRequestType ENTERPRISE
+      = new DigitalGateRequestType("enterprise");
 
 }

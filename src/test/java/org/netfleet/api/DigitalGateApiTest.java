@@ -21,41 +21,44 @@
  * www.terrayazilim.com.tr if you need additional information or have
  * any questions.
  */
-package org.netfleet.api.converter;
+package org.netfleet.api;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.netfleet.api.Model;
-import org.netfleet.api.ResponseConverter;
-import org.netfleet.api.ResponseEntity;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.netfleet.api.digitalgate.DigitalGateRequestType;
+import org.netfleet.api.digitalgate.DigitalGateRequestTypes;
+import org.netfleet.api.digitalgate.DigitalGateResponse;
+import org.netfleet.api.digitalgate.EnterpriseConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
+public class DigitalGateApiTest {
 
-/**
- * @author M.Çağrı TEPEBAŞILI - cagritepebasili [at] protonmail [dot] com
- * @version 1.0.0-RELEASE
- * @since 1.0.0-RELEASE
- */
-public class ResponseModelConverter<T extends Model> implements ResponseConverter<T, T> {
-  private static final Logger log = LoggerFactory.getLogger(ResponseModelConverter.class);
+  private final Logger log = LoggerFactory.getLogger(DigitalGateApiTest.class);
 
-  @Override
-  public ResponseEntity<T> convert(Class<T> tClass, ResponseEntity<String> entity) {
-    T object = null;
-    if (entity.hasBody()) {
-      String body = entity.getBody();
+  @Ignore
+  public void testSimple() {
+    String token = "";
+    String url = "";
 
-      if (JsonUtils.isJson(body)) {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-          object = mapper.readValue(entity.getBody(), tClass);
-        } catch (IOException e) {
-          log.error("", e);
-        }
-      }
+    DigitalGateRequestType type = DigitalGateRequestTypes.ENTERPRISE;
+    DigitalGateApi digitalGateApi = new DigitalGateApi(token, url);
+    DigitalGateResponse response = digitalGateApi.request("", type);
+
+    if (response != null) {
+      log.info("host: {}", response.host());
     }
-
-    return ResponseEntity.of(entity.getHeaders(), entity.getStatus(), object);
   }
+
+  @Ignore
+  public void test2() {
+    String token = "";
+    String url = "";
+
+    DigitalGateApi digitalGateApi = new DigitalGateApi(token, url);
+    DefaultDigitalGateApiAdapter adapter = new DefaultDigitalGateApiAdapter(digitalGateApi);
+
+    EnterpriseConfiguration cfg = adapter.makeRequest("");
+  }
+
 }

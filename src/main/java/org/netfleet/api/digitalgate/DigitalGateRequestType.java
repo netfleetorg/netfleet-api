@@ -23,16 +23,15 @@
  */
 package org.netfleet.api.digitalgate;
 
-import java.util.Locale;
+public class DigitalGateRequestType {
 
-public enum DigitalGateRequestType {
+  private final String value;
 
-  VTS,
-  FMS,
-  SERVIS;
+  public DigitalGateRequestType(String value) {
+    this.value = value;
+  }
 
-  @Override
-  public String toString() {
-    return this.name().toLowerCase(Locale.ENGLISH);
+  public String getValue() {
+    return value;
   }
 }

@@ -23,8 +23,8 @@
  */
 package org.netfleet.api;
 
-import org.netfleet.api.commons.http.HttpHeaders;
-import org.netfleet.api.commons.http.HttpStatus;
+import org.netfleet.sdk.network.http.HttpHeaders;
+import org.netfleet.sdk.network.http.HttpStatus;
 
 import java.io.Serializable;
 

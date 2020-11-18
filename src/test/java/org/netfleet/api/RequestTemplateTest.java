@@ -23,35 +23,39 @@
  */
 package org.netfleet.api;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Ignore;
+import org.junit.Test;
 
-/**
- * @author M.Çağrı TEPEBAŞILI - cagritepebasili [at] protonmail [dot] com
- */
-public class Projection implements Serializable {
+import java.util.HashMap;
+import java.util.Map;
 
-  public static String PARAMETER = "projection";
+public class RequestTemplateTest {
 
-  public static final Projection NONE = Projection.of(Object.class, "");
+  @Ignore
+  public void simpleTest() throws JsonProcessingException {
+    Projection projection = new Projection(User.class, "defaultUserProjection");
+    String path = "user";
 
-  private final Class<?> key;
-  private final String value;
+    Map<Class<?>, String> paths = new HashMap<>();
+    paths.put(User.class, path);
 
-  public Projection(Class<?> key, String value) {
-    this.key = key;
-    this.value = value;
-  }
+    Map<Class<?>, Projection> projections = new HashMap<>();
+    projections.put(User.class, projection);
 
-  public static Projection of(Class<?> key, String value) {
-    return new Projection(key, value);
-  }
+    RequestContext context = new RequestContext();
+    context.setPaths(paths);
+    context.setProjections(projections);
 
-  public Class<?> getKey() {
-    return this.key;
-  }
-
-  public String getValue() {
-    return this.value;
+    String url = "/api";
+    RequestTemplate template = new RequestTemplate(url, context);
+    ResponseEntity<User> user = template.findById(User.class, 2L);
+    if (user.hasBody()) {
+      System.out.println(new ObjectMapper().writeValueAsString(user.getBody()));
+    } else {
+      System.out.println(user.getStatus().getCode());
+    }
   }
 
 }

@@ -23,35 +23,9 @@
  */
 package org.netfleet.api;
 
-import java.io.Serializable;
+public interface Model {
 
-/**
- * @author M.Çağrı TEPEBAŞILI - cagritepebasili [at] protonmail [dot] com
- */
-public class Projection implements Serializable {
+  Long getId();
 
-  public static String PARAMETER = "projection";
-
-  public static final Projection NONE = Projection.of(Object.class, "");
-
-  private final Class<?> key;
-  private final String value;
-
-  public Projection(Class<?> key, String value) {
-    this.key = key;
-    this.value = value;
-  }
-
-  public static Projection of(Class<?> key, String value) {
-    return new Projection(key, value);
-  }
-
-  public Class<?> getKey() {
-    return this.key;
-  }
-
-  public String getValue() {
-    return this.value;
-  }
-
+  void setId(Long id);
 }

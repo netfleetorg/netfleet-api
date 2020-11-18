@@ -23,35 +23,13 @@
  */
 package org.netfleet.api;
 
-import java.io.Serializable;
-
 /**
  * @author M.Çağrı TEPEBAŞILI - cagritepebasili [at] protonmail [dot] com
  */
-public class Projection implements Serializable {
+public interface RequestTemplateFactory {
 
-  public static String PARAMETER = "projection";
+  RequestTemplate create(String url);
 
-  public static final Projection NONE = Projection.of(Object.class, "");
-
-  private final Class<?> key;
-  private final String value;
-
-  public Projection(Class<?> key, String value) {
-    this.key = key;
-    this.value = value;
-  }
-
-  public static Projection of(Class<?> key, String value) {
-    return new Projection(key, value);
-  }
-
-  public Class<?> getKey() {
-    return this.key;
-  }
-
-  public String getValue() {
-    return this.value;
-  }
+  RequestTemplate create(String url, long timeout);
 
 }

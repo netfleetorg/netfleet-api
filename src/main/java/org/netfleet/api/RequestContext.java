@@ -24,34 +24,37 @@
 package org.netfleet.api;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * @author M.Çağrı TEPEBAŞILI - cagritepebasili [at] protonmail [dot] com
  */
-public class Projection implements Serializable {
+public class RequestContext implements Serializable {
 
-  public static String PARAMETER = "projection";
+  private Map<Class<?>, String> paths;
+  private Map<Class<?>, Projection> projections;
 
-  public static final Projection NONE = Projection.of(Object.class, "");
-
-  private final Class<?> key;
-  private final String value;
-
-  public Projection(Class<?> key, String value) {
-    this.key = key;
-    this.value = value;
+  public RequestContext() {
   }
 
-  public static Projection of(Class<?> key, String value) {
-    return new Projection(key, value);
+  public RequestContext(Map<Class<?>, String> paths, Map<Class<?>, Projection> projections) {
+    this.paths = paths;
+    this.projections = projections;
   }
 
-  public Class<?> getKey() {
-    return this.key;
+  public void setPaths(Map<Class<?>, String> paths) {
+    this.paths = paths;
   }
 
-  public String getValue() {
-    return this.value;
+  public Map<Class<?>, String> getPaths() {
+    return paths;
   }
 
+  public void setProjections(Map<Class<?>, Projection> projections) {
+    this.projections = projections;
+  }
+
+  public Map<Class<?>, Projection> getProjections() {
+    return projections;
+  }
 }

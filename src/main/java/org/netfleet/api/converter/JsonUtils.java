@@ -21,37 +21,38 @@
  * www.terrayazilim.com.tr if you need additional information or have
  * any questions.
  */
-package org.netfleet.api;
+package org.netfleet.api.converter;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
 
 /**
  * @author M.Çağrı TEPEBAŞILI - cagritepebasili [at] protonmail [dot] com
+ * @version 1.0.0-RELEASE
+ * @since 1.0.0-RELEASE
  */
-public class Projection implements Serializable {
-
-  public static String PARAMETER = "projection";
-
-  public static final Projection NONE = Projection.of(Object.class, "");
-
-  private final Class<?> key;
-  private final String value;
-
-  public Projection(Class<?> key, String value) {
-    this.key = key;
-    this.value = value;
+public final class JsonUtils {
+  private JsonUtils() {
   }
 
-  public static Projection of(Class<?> key, String value) {
-    return new Projection(key, value);
-  }
+  /**
+   * @param json the text
+   * @return {@literal true} if given string is VALID json. Otherwise false.
+   */
+  public static boolean isJson(final String json) {
+    boolean valid = false;
+    try {
+      final JsonParser parser = new ObjectMapper().getJsonFactory()
+        .createJsonParser(json);
+      while (parser.nextToken() != null) {
+      }
+      valid = true;
+    } catch (IOException ignored) {
+    }
 
-  public Class<?> getKey() {
-    return this.key;
-  }
-
-  public String getValue() {
-    return this.value;
+    return valid;
   }
 
 }
