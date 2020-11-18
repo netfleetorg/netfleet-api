@@ -17,7 +17,7 @@
 
         <netfleet-sdk.version>1.0.0</netfleet-sdk.version>
         <jackson-core.version>2.9.8</jackson-core.version>
-        <jackson-databind.version>2.9.8</jackson-databind.version>
+        <jackson-databind.version>2.9.10.5</jackson-databind.version>
         <okhttp3.version>3.11.0</okhttp3.version>
 
         <slf4j-api.version>1.7.25</slf4j-api.version>
